@@ -2,7 +2,9 @@ import { Hero } from "@/components/Hero";
 import { Benefits } from "@/components/Benefits";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Pricing } from "@/components/Pricing";
+import { FAQ } from "@/components/FAQ";
 import { Footer } from "@/components/Footer";
+import { BackToTop } from "@/components/BackToTop";
 import { ThemeProvider } from "next-themes";
 import { useState, useEffect } from "react";
 import { ChatInterface } from "@/components/ChatInterface";
@@ -74,11 +76,17 @@ const Index = () => {
               <div id="pricing-section">
                 <Pricing />
               </div>
+              <div id="faq-section">
+                <FAQ />
+              </div>
               <Footer />
             </div>
           </>
         )}
         <WhatsAppChat />
+        {/* Only meaningful on the long marketing scroll, so it's hidden while
+            the full-screen chat interface is open. */}
+        {!showChat && <BackToTop />}
       </div>
     </ThemeProvider>
   );

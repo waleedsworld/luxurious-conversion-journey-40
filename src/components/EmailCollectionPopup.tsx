@@ -4,6 +4,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -44,13 +45,16 @@ export const EmailCollectionPopup = ({
           <DialogTitle className="text-2xl font-bold text-center">
             Limited Time Offer!
           </DialogTitle>
+          <DialogDescription className="sr-only">
+            Enter your email or phone number to claim an exclusive $15 website discount.
+          </DialogDescription>
         </DialogHeader>
         <div className="p-6 space-y-6">
           <div className="text-center space-y-4">
-            <p className="text-lg font-medium">
+            <p className="text-lg font-medium text-foreground">
               Get a complete holistic website for just $15!
             </p>
-            <p className="text-gray-500">
+            <p className="text-muted-foreground">
               Original price:{" "}
               <span className="line-through">$500-$1500</span>
             </p>

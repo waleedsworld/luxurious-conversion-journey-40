@@ -7,7 +7,7 @@ one flat **$15** package, free hosting, free revisions, and a friendly WhatsApp
 line to the humans behind it. Built with React, Vite, TypeScript, Tailwind and
 shadcn/ui — hand-tuned to load fast and convert faster.
 
-![Hero](docs/media/hero.png)
+![Animated hero demo](assets/demo.gif)
 
 ---
 

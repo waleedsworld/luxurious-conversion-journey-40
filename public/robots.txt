@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /payment
+Disallow: /payment/success
+Disallow: /payment/failed

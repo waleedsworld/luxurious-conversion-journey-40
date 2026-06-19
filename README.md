@@ -1,13 +1,43 @@
+<div align="center">
+
 # Web Development for $15 💸
 
-> Get a website. Get *famous*. Get it for the price of two coffees.
+### Get a website. Get *famous*. Get it for the price of two coffees.
 
 A punchy, single-page marketing site for a no-nonsense web-development service:
 one flat **$15** package, free hosting, free revisions, and a friendly WhatsApp
-line to the humans behind it. Built with React, Vite, TypeScript, Tailwind and
-shadcn/ui — hand-tuned to load fast and convert faster.
+line to the humans behind it. Built to load fast and convert faster.
 
-![Hero](docs/media/hero.png)
+<!-- Badges -->
+![React](https://img.shields.io/badge/React-18-149ECA?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white)
+![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-Radix-000000)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+
+<br/>
+
+<!-- Drop a screen-capture GIF at assets/demo.gif to bring this to life. -->
+![Demo](assets/demo.gif)
+
+</div>
+
+---
+
+## 📑 Table of contents
+
+- [Features](#-features)
+- [Screenshots](#-screenshots)
+- [Tech stack](#️-tech-stack)
+- [Getting started](#-getting-started)
+- [Configure payments](#-configure-payments-optional)
+- [Available scripts](#-available-scripts)
+- [Architecture](#-architecture)
+- [Project structure](#-project-structure)
+- [Live demo](#-live-demo)
+- [License](#-license)
 
 ---
 
@@ -27,25 +57,38 @@ shadcn/ui — hand-tuned to load fast and convert faster.
   straight to the team.
 - **Ziina payment flow** — `/payment`, `/payment/success` and
   `/payment/failed` routes wired to the Ziina payment API.
+- **Scroll & interaction tracking** — lightweight hooks record how far visitors
+  read and what they click, so the funnel can be tuned.
 - **Fully responsive** — looks sharp from a 390px phone to a widescreen
   monitor.
 - **Footer with real contact routes** — WhatsApp and email, always one scroll
   away.
 
+---
+
+## 📸 Screenshots
+
 | Desktop | Mobile |
 | --- | --- |
 | ![Full page](docs/media/full.png) | ![Mobile](docs/media/mobile.png) |
+
+| Hero | Footer |
+| --- | --- |
+| ![Hero](docs/media/hero.png) | ![Footer](docs/media/footer.png) |
 
 ---
 
 ## 🛠️ Tech stack
 
-- **[Vite](https://vitejs.dev/)** — lightning-fast dev server and build.
-- **[React 18](https://react.dev/)** + **TypeScript** — typed, component-driven UI.
-- **[Tailwind CSS](https://tailwindcss.com/)** + **[shadcn/ui](https://ui.shadcn.com/)** — the design system.
-- **[React Router](https://reactrouter.com/)** — client-side routing.
-- **[TanStack Query](https://tanstack.com/query)**, **[React Hook Form](https://react-hook-form.com/)** + **[Zod](https://zod.dev/)** — data & forms.
-- **[lucide-react](https://lucide.dev/)** icons and **[GSAP](https://gsap.com/)** for motion.
+| Layer | Tools |
+| --- | --- |
+| **Build** | [Vite](https://vitejs.dev/) with the SWC React plugin |
+| **UI** | [React 18](https://react.dev/) + **TypeScript** |
+| **Styling** | [Tailwind CSS](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/) (Radix primitives) |
+| **Routing** | [React Router](https://reactrouter.com/) |
+| **Data & forms** | [TanStack Query](https://tanstack.com/query), [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/) |
+| **Motion & icons** | [GSAP](https://gsap.com/) and [lucide-react](https://lucide.dev/) |
+| **Payments** | [Ziina](https://ziina.com/) payment intents |
 
 ---
 
@@ -84,7 +127,16 @@ npm run dev
 
 Open **http://localhost:8080** and you're off.
 
-### Configure payments (optional)
+### Build for production
+
+```bash
+npm run build      # outputs to dist/
+npm run preview    # serve the production build locally
+```
+
+---
+
+## 💳 Configure payments (optional)
 
 The pricing button kicks off a real Ziina payment intent. To wire it up, copy
 the example env file and drop in your key — it's read from the environment, and
@@ -99,12 +151,51 @@ cp .env.example .env.local
 Without a key the UI still runs perfectly; only the live payment call is
 skipped (and it'll warn you in the console).
 
-### Build for production
+---
 
-```bash
-npm run build      # outputs to dist/
-npm run preview    # serve the production build locally
+## 📜 Available scripts
+
+| Script | What it does |
+| --- | --- |
+| `npm run dev` | Start the Vite dev server with hot-reload on port 8080. |
+| `npm run build` | Type-check and bundle a production build into `dist/`. |
+| `npm run build:dev` | Build in development mode (unminified, easier to debug). |
+| `npm run preview` | Serve the production build locally for a final look. |
+| `npm run lint` | Run ESLint across the project. |
+
+---
+
+## 🧭 Architecture
+
+A single-page React app served by Vite. Routing is client-side; the only
+external call is the Ziina payment intent, isolated behind a service module so
+the marketing UI never talks to the API directly.
+
+```mermaid
+flowchart TD
+    A[main.tsx] --> B[App.tsx: Router + Query + Theme]
+    B --> C[Index page]
+    B --> D[Payment pages]
+    C --> E[Hero / Benefits / HowItWorks / Pricing / Footer]
+    C --> F[Lead capture: Email popup + WebsiteForm]
+    C --> G[WhatsApp chat widget]
+    E -->|Buy now| D
+    D --> H[services/payment.ts]
+    H -->|VITE_ZIINA_API_KEY| I[(Ziina API)]
+    D --> J[payment/success and payment/failed]
 ```
+
+**How it flows**
+
+1. `main.tsx` mounts `App.tsx`, which sets up the router, TanStack Query client
+   and theme provider.
+2. The **Index** page composes the marketing sections and the lead-capture and
+   chat widgets.
+3. Clicking **Buy now** routes to the **Payment** page, which asks
+   `services/payment.ts` to create a Ziina payment intent using
+   `VITE_ZIINA_API_KEY`.
+4. Ziina redirects back to `/payment/success` or `/payment/failed`, each a
+   dedicated result page.
 
 ---
 
@@ -113,11 +204,12 @@ npm run preview    # serve the production build locally
 ```
 src/
 ├── components/        # Hero, Benefits, HowItWorks, Pricing, Footer, chat widgets…
-│   └── ui/            # shadcn/ui primitives
+│   └── ui/            # shadcn/ui primitives (Radix)
 ├── pages/             # Index, Payment, PaymentSuccess, PaymentFailed, NotFound
 ├── hooks/             # scroll tracking, mobile detection, toasts
 ├── services/          # Ziina payment integration
-└── utils/             # action handler, API config, theme preview
+├── utils/             # action handler, API config, theme preview
+└── lib/               # shared helpers (cn, etc.)
 ```
 
 ---

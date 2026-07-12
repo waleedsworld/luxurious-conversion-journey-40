@@ -38,7 +38,7 @@ export const WhatsAppChat = () => {
 
   return (
     <>
-      <div id="whatsapp-chat" className={`fixed bottom-24 left-12 z-50 w-[250px] bg-white rounded-lg shadow-2xl transform transition-all duration-300 ${isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'}`}>
+      <div id="whatsapp-chat" role="dialog" aria-label="WhatsApp chat" aria-hidden={!isVisible} className={`fixed bottom-24 left-12 z-50 w-[250px] bg-white rounded-lg shadow-2xl transform transition-all duration-300 ${isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'}`}>
         <div className="whatsapp-chat-header bg-[#075e54] text-white p-2 rounded-t-lg flex items-center gap-2">
           <div className="whatsapp-chat-avatar w-6 h-6 rounded-full overflow-hidden">
             <img src="https://i.ibb.co/s90nbwpr/techrealm-logo.jpg" alt="Company Logo" className="w-full h-full object-cover" />
@@ -70,15 +70,17 @@ export const WhatsAppChat = () => {
           <div className="blanter-msg flex items-center gap-1 bg-white p-1 mt-2 rounded-lg shadow-sm">
             <textarea
               id="chat-input"
+              aria-label="Write a WhatsApp message"
               placeholder="Write a response"
               maxLength={120}
-              className="flex-1 resize-none border-none focus:outline-none text-xs h-6"
+              className="flex-1 resize-none border-none focus:outline-none text-xs h-6 text-gray-900 placeholder:text-gray-400"
               onKeyPress={handleKeyPress}
               onChange={handleInputChange}
             />
             <button
               onClick={handleSendMessage}
-              className="bg-[#4caf50] p-1 rounded-full hover:bg-[#45a049] transition-colors"
+              aria-label="Send WhatsApp message"
+              className="bg-[#4caf50] p-1 rounded-full hover:bg-[#45a049] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
               <svg viewBox="0 0 448 448" className="w-3 h-3 fill-white">
                 <path d="M.213 32L0 181.333 320 224 0 266.667.213 416 448 224z"/>
@@ -87,6 +89,7 @@ export const WhatsAppChat = () => {
           </div>
         </div>
         <button
+          aria-label="Close chat"
           className="close-chat absolute top-0.5 right-0.5 text-white text-sm font-bold w-4 h-4 flex items-center justify-center hover:bg-[#063e39] rounded-full transition-colors"
           onClick={handleVisibilityToggle}
         >

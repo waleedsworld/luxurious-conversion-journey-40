@@ -37,7 +37,7 @@ export const Pricing = () => {
             </ul>
             <Button 
               onClick={handleGetStarted}
-              className="bg-secondary-DEFAULT text-black dark:text-white hover:bg-secondary-DEFAULT/90 px-8 py-6 rounded-lg text-lg font-semibold"
+              className="bg-secondary-DEFAULT text-black hover:bg-secondary-DEFAULT/90 px-8 py-6 rounded-lg text-lg font-semibold"
             >
               Get Started Now
             </Button>

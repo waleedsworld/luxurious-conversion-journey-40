@@ -8,8 +8,8 @@ export const PaymentFailed = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <div className="max-w-md w-full space-y-8 text-center">
-        <div className="bg-red-100 dark:bg-red-900/20 rounded-full p-3 w-16 h-16 mx-auto">
-          <AlertCircle className="w-10 h-10 text-red-600 dark:text-red-400" />
+        <div className="bg-red-100 dark:bg-red-900/20 rounded-full w-16 h-16 mx-auto flex items-center justify-center">
+          <AlertCircle className="w-8 h-8 text-red-600 dark:text-red-400" />
         </div>
         <h1 className="text-3xl font-bold text-foreground">Payment Failed</h1>
         <p className="text-muted-foreground">Something went wrong with your payment.</p>

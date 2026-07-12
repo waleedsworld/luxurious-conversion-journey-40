@@ -342,10 +342,11 @@ export const ChatInterface = ({ formData }: ChatInterfaceProps) => {
               className="flex-1"
               disabled={!canType}
             />
-            <Button 
-              onClick={handleSendMessage} 
-              size="icon" 
+            <Button
+              onClick={handleSendMessage}
+              size="icon"
               disabled={!canType}
+              aria-label="Send message"
               onMouseEnter={() => handleAction('hover', { element: 'send_message_button' })}
             >
               <Send className="h-4 w-4" />

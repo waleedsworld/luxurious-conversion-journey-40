@@ -5,11 +5,25 @@ import { useTheme } from "next-themes";
 import { useState } from "react";
 import { WebsiteForm } from "./WebsiteForm";
 import { handleAction } from "@/utils/actionHandler";
+import { useExperiment } from "@/hooks/useExperiment";
+
+const HERO_CTA_COPY: Record<string, string> = {
+  control: "Get Your Website Now for 15 USD",
+  urgency: "Claim Your Website Today — Just 15 USD",
+};
 
 export const Hero = () => {
   const words = ["Rich", "Famous", "Successful", "Profitable", "Unstoppable"];
   const { theme, setTheme } = useTheme();
   const [showForm, setShowForm] = useState(false);
+
+  // A/B test the primary hero CTA copy. Assignment is stable per visitor and
+  // exposure is tracked automatically on mount.
+  const heroCta = useExperiment({
+    id: "hero_cta_copy",
+    variants: ["control", "urgency"],
+  });
+  const heroCtaLabel = HERO_CTA_COPY[heroCta.variant] ?? HERO_CTA_COPY.control;
 
   const handleThemeChange = async () => {
     const newTheme = theme === "dark" ? "light" : "dark";
@@ -47,11 +61,12 @@ export const Hero = () => {
           size="lg"
           onClick={() => {
             handleAction('button_click', { button_id: 'get_website_now' });
+            heroCta.convert('cta_click');
             setShowForm(true);
           }}
           className="bg-secondary-DEFAULT text-black hover:bg-secondary-DEFAULT/90 text-lg px-8 py-6 h-auto transform hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-secondary-DEFAULT/20 animate-pulse"
         >
-          Get Your Website Now for 15 USD
+          {heroCtaLabel}
         </Button>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">

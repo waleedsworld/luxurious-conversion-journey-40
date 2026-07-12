@@ -265,6 +265,8 @@ export const ChatInterface = ({ formData }: ChatInterfaceProps) => {
             <img
               src="https://www.aurumbureau.com/wp-content/uploads/2020/11/Aurum-Speakers-Bureau-Samy-Kamkar.jpg"
               alt="Developer"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover"
             />
           </div>
@@ -297,6 +299,8 @@ export const ChatInterface = ({ formData }: ChatInterfaceProps) => {
                   <img
                     src="https://www.aurumbureau.com/wp-content/uploads/2020/11/Aurum-Speakers-Bureau-Samy-Kamkar.jpg"
                     alt="Developer"
+              loading="lazy"
+              decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </div>

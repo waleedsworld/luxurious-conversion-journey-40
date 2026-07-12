@@ -41,7 +41,7 @@ export const WhatsAppChat = () => {
       <div id="whatsapp-chat" role="dialog" aria-label="WhatsApp chat" aria-hidden={!isVisible} className={`fixed bottom-24 left-12 z-50 w-[250px] bg-white rounded-lg shadow-2xl transform transition-all duration-300 ${isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'}`}>
         <div className="whatsapp-chat-header bg-[#075e54] text-white p-2 rounded-t-lg flex items-center gap-2">
           <div className="whatsapp-chat-avatar w-6 h-6 rounded-full overflow-hidden">
-            <img src="https://i.ibb.co/s90nbwpr/techrealm-logo.jpg" alt="Company Logo" className="w-full h-full object-cover" />
+            <img src="https://i.ibb.co/s90nbwpr/techrealm-logo.jpg" alt="Company Logo" loading="lazy" decoding="async" className="w-full h-full object-cover" />
           </div>
           <p className="text-xs">
             <span className="whatsapp-chat-name font-semibold block">Web Development</span>

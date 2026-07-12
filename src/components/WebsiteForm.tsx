@@ -456,6 +456,8 @@ export const WebsiteForm = ({ open, onOpenChange }: WebsiteFormProps) => {
                   <img
                     src="https://www.aurumbureau.com/wp-content/uploads/2020/11/Aurum-Speakers-Bureau-Samy-Kamkar.jpg"
                     alt="Waleed Ajmal"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </div>

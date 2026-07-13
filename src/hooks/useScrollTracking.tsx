@@ -1,11 +1,16 @@
 import { useEffect, useCallback } from 'react';
 import { handleAction } from '@/utils/actionHandler';
 
+type TrackedElement = HTMLElement & {
+  lastScrollTop?: number;
+  touchStartY?: number;
+};
+
 export const useScrollTracking = (elementId: string) => {
   const handleScroll = useCallback(async (e: Event) => {
-    const element = e.target as HTMLElement;
-    const direction = element.scrollTop > (element as any).lastScrollTop ? 'down' : 'up';
-    (element as any).lastScrollTop = element.scrollTop;
+    const element = e.target as TrackedElement;
+    const direction = element.scrollTop > (element.lastScrollTop ?? 0) ? 'down' : 'up';
+    element.lastScrollTop = element.scrollTop;
 
     // Track both scroll and swipe actions
     await handleAction('scroll', { 
@@ -19,14 +24,14 @@ export const useScrollTracking = (elementId: string) => {
   }, [elementId]);
 
   const handleTouchStart = useCallback((e: TouchEvent) => {
-    const element = e.target as HTMLElement;
-    (element as any).touchStartY = e.touches[0].clientY;
+    const element = e.target as TrackedElement;
+    element.touchStartY = e.touches[0].clientY;
   }, []);
 
   const handleTouchEnd = useCallback(async (e: TouchEvent) => {
-    const element = e.target as HTMLElement;
+    const element = e.target as TrackedElement;
     const touchEndY = e.changedTouches[0].clientY;
-    const direction = (element as any).touchStartY > touchEndY ? 'down' : 'up';
+    const direction = (element.touchStartY ?? 0) > touchEndY ? 'down' : 'up';
     
     await handleAction('swipe', { 
       direction,
@@ -35,9 +40,9 @@ export const useScrollTracking = (elementId: string) => {
   }, [elementId]);
 
   useEffect(() => {
-    const element = document.getElementById(elementId);
+    const element = document.getElementById(elementId) as TrackedElement | null;
     if (element) {
-      (element as any).lastScrollTop = 0;
+      element.lastScrollTop = 0;
       element.addEventListener('scroll', handleScroll);
       element.addEventListener('touchstart', handleTouchStart);
       element.addEventListener('touchend', handleTouchEnd);

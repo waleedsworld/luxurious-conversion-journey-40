@@ -25,12 +25,13 @@ const Index = () => {
   });
 
   useEffect(() => {
+    const scrollWindow = window as Window & { lastScrollY?: number };
     const handleScroll = async () => {
       await handleAction('scroll', {
-        direction: window.scrollY > (window as any).lastScrollY ? 'down' : 'up',
+        direction: window.scrollY > (scrollWindow.lastScrollY ?? 0) ? 'down' : 'up',
         element: 'main-content'
       });
-      (window as any).lastScrollY = window.scrollY;
+      scrollWindow.lastScrollY = window.scrollY;
     };
 
     window.addEventListener('scroll', handleScroll);

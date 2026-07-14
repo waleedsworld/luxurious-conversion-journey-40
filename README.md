@@ -1,69 +1,133 @@
-# Welcome to your Lovable project
+# Web Development for $15 💸
 
-## Project info
+> Get a website. Get *famous*. Get it for the price of two coffees.
 
-**URL**: https://lovable.dev/projects/566c3bdd-dae0-4b16-acb7-1207331fae0c
+A punchy, single-page marketing site for a no-nonsense web-development service:
+one flat **$15** package, free hosting, free revisions, and a friendly WhatsApp
+line to the humans behind it. Built with React, Vite, TypeScript, Tailwind and
+shadcn/ui — hand-tuned to load fast and convert faster.
 
-## How can I edit this code?
+![Hero](docs/media/hero.png)
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+## ✨ Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/566c3bdd-dae0-4b16-acb7-1207331fae0c) and start prompting.
+- **Conversion-first hero** — animated typewriter headline ("Get *Rich /
+  Famous / Successful / Unstoppable*") with a dark-to-purple gradient and a
+  can't-miss yellow call-to-action.
+- **"What You Get" grid** — the value props at a glance, on tidy muted cards.
+- **"How It Works" section** — a three-step, idea → pay → launch walkthrough
+  so visitors know exactly what happens after they click.
+- **Transparent pricing card** — one package, five perks, zero surprises.
+- **Light / dark mode** — a one-tap theme toggle powered by `next-themes`.
+- **Lead capture** — a "Limited Time Offer" email/phone popup and an inline
+  website-brief form.
+- **WhatsApp chat widget** — a floating "Chat with Us" bubble that deep-links
+  straight to the team.
+- **Ziina payment flow** — `/payment`, `/payment/success` and
+  `/payment/failed` routes wired to the Ziina payment API.
+- **Fully responsive** — looks sharp from a 390px phone to a widescreen
+  monitor.
+- **Footer with real contact routes** — WhatsApp and email, always one scroll
+  away.
 
-Changes made via Lovable will be committed automatically to this repo.
+| Desktop | Mobile |
+| --- | --- |
+| ![Full page](docs/media/full.png) | ![Mobile](docs/media/mobile.png) |
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🛠️ Tech stack
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- **[Vite](https://vitejs.dev/)** — lightning-fast dev server and build.
+- **[React 18](https://react.dev/)** + **TypeScript** — typed, component-driven UI.
+- **[Tailwind CSS](https://tailwindcss.com/)** + **[shadcn/ui](https://ui.shadcn.com/)** — the design system.
+- **[React Router](https://reactrouter.com/)** — client-side routing.
+- **[TanStack Query](https://tanstack.com/query)**, **[React Hook Form](https://react-hook-form.com/)** + **[Zod](https://zod.dev/)** — data & forms.
+- **[lucide-react](https://lucide.dev/)** icons and **[GSAP](https://gsap.com/)** for motion.
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 🚀 Getting started
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Prerequisites
 
-# Step 3: Install the necessary dependencies.
-npm i
+You'll need **[Node.js](https://nodejs.org/) 18 or newer** (which ships with
+`npm`). Check what you've got:
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+node -v   # should print v18.x.x or higher
+npm -v
+```
+
+If Node isn't installed, the easiest route is [nvm](https://github.com/nvm-sh/nvm):
+
+```bash
+nvm install 18
+nvm use 18
+```
+
+### Install & run
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/waleedsworld/luxurious-conversion-journey-40.git
+cd luxurious-conversion-journey-40
+
+# 2. Install dependencies
+npm install
+
+# 3. Start the dev server (hot-reload on http://localhost:8080)
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Open **http://localhost:8080** and you're off.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Configure payments (optional)
 
-**Use GitHub Codespaces**
+The pricing button kicks off a real Ziina payment intent. To wire it up, copy
+the example env file and drop in your key — it's read from the environment, and
+**never** committed:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```bash
+cp .env.example .env.local
+# then edit .env.local:
+# VITE_ZIINA_API_KEY=your_real_key_here
+```
 
-## What technologies are used for this project?
+Without a key the UI still runs perfectly; only the live payment call is
+skipped (and it'll warn you in the console).
 
-This project is built with .
+### Build for production
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```bash
+npm run build      # outputs to dist/
+npm run preview    # serve the production build locally
+```
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/566c3bdd-dae0-4b16-acb7-1207331fae0c) and click on Share -> Publish.
+## 📁 Project structure
 
-## I want to use a custom domain - is that possible?
+```
+src/
+├── components/        # Hero, Benefits, HowItWorks, Pricing, Footer, chat widgets…
+│   └── ui/            # shadcn/ui primitives
+├── pages/             # Index, Payment, PaymentSuccess, PaymentFailed, NotFound
+├── hooks/             # scroll tracking, mobile detection, toasts
+├── services/          # Ziina payment integration
+└── utils/             # action handler, API config, theme preview
+```
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+---
+
+## 🌐 Live demo
+
+Live demo — deploying soon.
+
+---
+
+## 📄 License
+
+Released under the MIT License. Build something great with it. 🚀

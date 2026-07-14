@@ -1,8 +1,20 @@
-// This is a temporary solution for testing purposes only
-// TODO: Replace with proper key management in production
-export const API_KEY = "zI6ZjEW1qmvGW0rLD/00Bf8orcSUGLp5dLzdSlEq+/dpUK1lwgYeYnxSajhFMSBa";
+// Payment provider (Ziina) API key.
+//
+// IMPORTANT: never commit real secrets. Provide the key at build/run time via
+// a Vite environment variable in an untracked `.env.local`:
+//
+//   VITE_ZIINA_API_KEY=your_real_key_here
+//
+// See `.env.example` for the template.
+export const API_KEY: string = import.meta.env.VITE_ZIINA_API_KEY ?? "";
 
-// Helper function to get the API key
-export const getApiKey = () => {
+// Helper to read the API key, warning loudly if it hasn't been configured.
+export const getApiKey = (): string => {
+  if (!API_KEY) {
+    console.warn(
+      "VITE_ZIINA_API_KEY is not set — payment requests will fail. " +
+        "Copy .env.example to .env.local and add your key."
+    );
+  }
   return API_KEY;
 };

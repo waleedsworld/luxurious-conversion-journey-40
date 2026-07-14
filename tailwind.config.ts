@@ -36,6 +36,29 @@ export default {
           DEFAULT: "#6B46C1",
           foreground: "#FFFFFF",
         },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        // Flat aliases so the `-DEFAULT` utility classes used across the app
+        // (e.g. bg-secondary-DEFAULT, from-primary-DEFAULT) actually compile.
+        // Without these, Tailwind only emits `bg-secondary` and the brand
+        // colors render as transparent/white.
+        "primary-DEFAULT": "#0A0A0A",
+        "secondary-DEFAULT": "#FFD700",
+        "accent-DEFAULT": "#6B46C1",
       },
       keyframes: {
         "fade-in": {

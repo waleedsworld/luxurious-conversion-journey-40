@@ -1,6 +1,8 @@
 import { Hero } from "@/components/Hero";
 import { Benefits } from "@/components/Benefits";
+import { HowItWorks } from "@/components/HowItWorks";
 import { Pricing } from "@/components/Pricing";
+import { Footer } from "@/components/Footer";
 import { ThemeProvider } from "next-themes";
 import { useState, useEffect } from "react";
 import { ChatInterface } from "@/components/ChatInterface";
@@ -66,9 +68,13 @@ const Index = () => {
               <div id="benefits-section">
                 <Benefits />
               </div>
+              <div id="how-it-works-section">
+                <HowItWorks />
+              </div>
               <div id="pricing-section">
                 <Pricing />
               </div>
+              <Footer />
             </div>
           </>
         )}
